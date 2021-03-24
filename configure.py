@@ -76,6 +76,7 @@ arg_parser.add_argument('--c++-dialect', action='store', dest='cpp_dialect', def
 arg_parser.add_argument('--cook', action='append', dest='cook', default=[],
                         help='Supply this dependency locally for development via `cmake-cooking` (can be repeated)')
 arg_parser.add_argument('--verbose', dest='verbose', action='store_true', help='Make configure output more verbose.')
+arg_parser.add_argument('--compile-commands-json', dest='ccj', action = 'store_true', help='Generate compile_commands.json (for clangd/cquery/ccls)')
 add_tristate(
     arg_parser,
     name = 'dpdk',
@@ -222,6 +223,8 @@ def configure_mode(mode):
         ARGS = ['cmake', '-G', 'Ninja', '../..']
         dir = BUILD_PATH
     ARGS += TRANSLATED_ARGS
+    if args.ccj:
+        ARGS += [ '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON' ];
     if args.verbose:
         print("Running CMake in '{}' ...".format(dir))
         print(" \\\n  ".join(ARGS))

@@ -35,7 +35,7 @@
 set (Boost_NO_BOOST_CMAKE ON)
 
 # This is the minimum version of Boost we need the CMake-bundled `FindBoost.cmake` to know about.
-find_package (Boost 1.64 MODULE)
+find_package (Boost 1.74 MODULE)
 
 #
 # Iterate through the dependency list defined below and execute `find_package`
@@ -75,7 +75,7 @@ macro (seastar_find_dependencies)
   # without the testing library, however the component is always specified as required
   # to keep the CMake code minimalistic and easy-to-use.
   set (_seastar_dep_args_Boost
-    1.64.0
+    1.74.0
     COMPONENTS
       program_options
       thread

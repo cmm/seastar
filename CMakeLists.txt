@@ -160,6 +160,11 @@ if (NOT CMAKE_BUILD_TYPE)
   set (CMAKE_BUILD_TYPE "Release")
 endif ()
 
+if (CMAKE_EXPORT_COMPILE_COMMANDS)
+  # force all magic include paths to become explicit -isystem args
+  set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES})
+endif ()
+
 set (Seastar_ALLOC_PAGE_SIZE
   ""
   CACHE
