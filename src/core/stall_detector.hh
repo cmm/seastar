@@ -50,6 +50,7 @@ class cpu_stall_detector {
     std::atomic<uint64_t> _last_tasks_processed_seen{};
     unsigned _stall_detector_reports_per_minute;
     std::atomic<uint64_t> _stall_detector_missed_ticks = { 0 };
+    uint64_t _total_detected = 0;
     unsigned _reported = 0;
     unsigned _total_reported = 0;
     unsigned _max_reports_per_minute;
@@ -82,6 +83,7 @@ public:
     void on_signal();
     void start_sleep();
     void end_sleep();
+    uint64_t get_total_detected() const noexcept { return _total_detected; }
 };
 
 }

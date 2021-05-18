@@ -614,6 +614,8 @@ public:
     steady_clock_type::duration total_busy_time();
     std::chrono::nanoseconds total_steal_time();
 
+    static uint64_t get_total_detected_stalls();
+
     const io_stats& get_io_stats() const { return _io_stats; }
     /// Returns statistics related to scheduling. The statistics are
     /// local to this shard.

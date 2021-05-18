@@ -1120,6 +1120,7 @@ void cpu_stall_detector::on_signal() {
     } else {
         _last_tasks_processed_seen.store(tasks_processed, std::memory_order_relaxed);
     }
+    ++_total_detected;
     arm_timer();
 }
 
@@ -1204,6 +1205,11 @@ reactor::get_stall_detector_report_function() const {
 void
 reactor::block_notifier(int) {
     engine()._cpu_stall_detector->on_signal();
+}
+
+uint64_t
+reactor::get_total_detected_stalls() {
+    return engine()._cpu_stall_detector->get_total_detected();
 }
 
 void
